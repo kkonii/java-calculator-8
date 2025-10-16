@@ -1,7 +1,6 @@
 package calculator.domain;
 
 import java.util.Arrays;
-import java.util.List;
 
 public class DelimiterFilter {
 
@@ -9,17 +8,18 @@ public class DelimiterFilter {
     private static final int VALID_CUSTOM_LENGTH = 1;
 
     public String filterCustomDelimiter(String input) {
-        List<String> filtered = Arrays.stream(input.split(CUSTOM_FORMAT_MARKS))
+        String filtered = Arrays.stream(input.split(CUSTOM_FORMAT_MARKS))
                 //잘리고 남은 공백은 버린다
                 .filter(f -> !f.isBlank())
-                .toList();
+                .toList()
+                .getFirst();
 
-        validateLength(filtered.getFirst());
+        validateLength(filtered);
 
-        return filtered.getFirst();
+        return filtered;
     }
 
-    private void validateLength (String extracted) {
+    private void validateLength(String extracted) {
         if (extracted.length() > VALID_CUSTOM_LENGTH) {
             throw new IllegalArgumentException("커스텀 구분자는 " + VALID_CUSTOM_LENGTH + "개만 입력할 수 있습니다.");
         }
