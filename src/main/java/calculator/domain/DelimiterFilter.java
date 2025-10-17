@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class DelimiterFilter {
 
-    private static final String CUSTOM_FORMAT_MARKS = "/|\\\\n";
+    private static final String CUSTOM_FORMAT_MARKS = "//|\\\\n";
     private static final int VALID_CUSTOM_LENGTH = 1;
 
     public String filterCustomDelimiter(String input) {
