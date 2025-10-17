@@ -10,7 +10,7 @@ public class DelimiterFilter {
     public String filterCustomDelimiter(String input) {
         String filtered = Arrays.stream(input.split(CUSTOM_FORMAT_MARKS))
                 //잘리고 남은 공백은 버린다
-                .filter(f -> !f.isBlank())
+                .filter(f -> !f.isEmpty())
                 .toList()
                 .getFirst();
 
