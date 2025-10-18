@@ -15,9 +15,16 @@ public class NumbersTest {
     }
 
     @Test
-    @DisplayName("[예외] 양수가 아닌 숫자에 대해 에외를 발생시킨다")
+    @DisplayName("[예외] 음수값에 대해 에외를 발생시킨다")
     void throw_when_not_positive() {
         Assertions.assertThatThrownBy(() -> new Numbers(List.of(1, -2)))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    @DisplayName("[예외] 0값에 대해 에외를 발생시킨다")
+    void throw_when_zero() {
+        Assertions.assertThatThrownBy(() -> new Numbers(List.of(0)))
                 .isInstanceOf(IllegalArgumentException.class);
     }
 }

@@ -12,7 +12,7 @@ public class Numbers {
     }
 
     private void validate(int number) {
-        if (number < 0) {
+        if (number <= 0) {
             throw new IllegalArgumentException("숫자는 양수만 입력 가능합니다.");
         }
     }
