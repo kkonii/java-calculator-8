@@ -6,18 +6,18 @@ import java.util.List;
 
 public class NumberFilter {
 
-    public static Numbers filter(FilteredInputDto dto) {
+    public Numbers filter(FilteredInputDto dto) {
         String regex = "[" + String.join(" | ", dto.delimiterInput()) + "]";
 
         List<Integer> splitNumbers = Arrays.stream(dto.numberInput().split(regex))
                 .filter(s -> !s.isBlank())
-                .map(NumberFilter::filterNonIntegerValue)
+                .map(this::filterNonIntegerValue)
                 .toList();
 
         return new Numbers(splitNumbers);
     }
 
-    private static int filterNonIntegerValue(String value) {
+    private int filterNonIntegerValue(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
