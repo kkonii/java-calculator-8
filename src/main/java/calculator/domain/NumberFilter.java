@@ -6,12 +6,14 @@ import java.util.List;
 
 public class NumberFilter {
 
-    public static List<Integer> filter(CalculatorDto dto) {
+    public static Numbers filter(CalculatorDto dto) {
         String regex = "[" + String.join(" | ", dto.delimiter()) + "]";
 
-        return Arrays.stream(dto.numbersInput().split(regex))
+        List<Integer> splitNumbers = Arrays.stream(dto.numbersInput().split(regex))
                 .filter(s -> !s.isBlank())
                 .map(Integer::parseInt)
                 .toList();
+
+        return new Numbers(splitNumbers);
     }
 }
