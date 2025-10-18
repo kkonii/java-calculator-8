@@ -11,9 +11,17 @@ public class NumberFilter {
 
         List<Integer> splitNumbers = Arrays.stream(dto.numberInput().split(regex))
                 .filter(s -> !s.isBlank())
-                .map(Integer::parseInt)
+                .map(NumberFilter::filterNonIntegerValue)
                 .toList();
 
         return new Numbers(splitNumbers);
+    }
+
+    private static int filterNonIntegerValue(String value) {
+        try {
+            return Integer.parseInt(value);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException("숫자를 입력해야 하는 위치에 다른 문자가 입력되었습니다.");
+        }
     }
 }
