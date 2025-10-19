@@ -23,7 +23,7 @@ public class Calculator {
     }
 
     public void run() {
-        String consoleInput = inputView.getInput();
+        String consoleInput = inputView.getConsoleInput();
         FilteredInputDto dto = patternFilter.filterInput(consoleInput);
 
         System.out.println(dto.delimiterInput());

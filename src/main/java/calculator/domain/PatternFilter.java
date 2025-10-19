@@ -10,7 +10,7 @@ public class PatternFilter {
 
     private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[가-힣A-Za-z0-9,:]+$");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+)\\\\n(.+)$");
-    private static final String CUSTOM_FORMAT_TAGS = "//|\\\\n";
+    private static final String CUSTOM_FORMAT_MARKS = "//|\\\\n";
 
     private final DelimiterFilter delimiterFilter;
 
@@ -23,15 +23,15 @@ public class PatternFilter {
         Matcher customMatcher = CUSTOM_PATTERN.matcher(consoleInput);
 
         if (defaultMatcher.matches()) {
-            return delimiterFilter.filterByDefault(consoleInput);
+            return delimiterFilter.filterAsDefault(consoleInput);
         }
 
         if (customMatcher.matches()) {
-            List<String> splitInput = Arrays.stream(consoleInput.split(CUSTOM_FORMAT_TAGS))
+            List<String> splitInput = Arrays.stream(consoleInput.split(CUSTOM_FORMAT_MARKS))
                     .filter(f -> !f.isEmpty())
                     .toList();
 
-            return delimiterFilter.filterByCustom(splitInput);
+            return delimiterFilter.filterAsCustom(splitInput);
         }
 
         throw new IllegalArgumentException("올바른 입력 형식이 아닙니다.");

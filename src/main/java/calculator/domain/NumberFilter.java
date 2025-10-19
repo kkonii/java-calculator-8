@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class NumberFilter {
 
-    private static final String MATCHER_FORMAT = "[^\\d\\s %s]";
+    private static final String MATCHER_REGEX_FORMAT = "[^\\d\\s %s]";
 
     public Numbers filter(FilteredInputDto dto) {
         String regex = dto.delimiterInput().stream()
@@ -26,7 +26,7 @@ public class NumberFilter {
     }
 
     private String filterNonCustomized(String value, String regex) {
-        Matcher matcher = Pattern.compile(String.format(MATCHER_FORMAT, regex)).matcher(value);
+        Matcher matcher = Pattern.compile(String.format(MATCHER_REGEX_FORMAT, regex)).matcher(value);
 
         if (matcher.find()) {
             throw new IllegalArgumentException("커스텀으로 지정하지 않은 구분자가 문자열에 포함되었습니다.");
