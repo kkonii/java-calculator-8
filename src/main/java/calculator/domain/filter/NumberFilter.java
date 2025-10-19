@@ -1,5 +1,6 @@
-package calculator.domain;
+package calculator.domain.filter;
 
+import calculator.domain.Numbers;
 import calculator.dto.FilteredInputDto;
 import java.util.Arrays;
 import java.util.List;
@@ -11,21 +12,21 @@ public class NumberFilter {
 
     private static final String MATCHER_REGEX_FORMAT = "[^-?\\d+\\w %s]";
 
-    public Numbers filter(FilteredInputDto dto) {
+    public Numbers filterValidNumbers(FilteredInputDto dto) {
         String regex = dto.delimiterInput().stream()
                 .map(Pattern::quote)
                 .collect(Collectors.joining("|"));
 
         List<Integer> splitNumbers = Arrays.stream(dto.numberInput().split(regex))
                 .filter(s -> !s.isBlank())
-                .map(s -> filterNonCustomized(s, regex))
-                .map(this::filterNonIntegerValue)
+                .map(s -> validateNonCustomized(s, regex))
+                .map(this::validateNonIntegerValue)
                 .toList();
 
         return new Numbers(splitNumbers);
     }
 
-    private String filterNonCustomized(String value, String regex) {
+    private String validateNonCustomized(String value, String regex) {
         Matcher matcher = Pattern.compile(String.format(MATCHER_REGEX_FORMAT, regex)).matcher(value);
 
         if (matcher.find()) {
@@ -35,7 +36,7 @@ public class NumberFilter {
         return value;
     }
 
-    private int filterNonIntegerValue(String value) {
+    private int validateNonIntegerValue(String value) {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {

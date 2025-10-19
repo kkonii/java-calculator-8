@@ -1,4 +1,4 @@
-package calculator.domain;
+package calculator.domain.filter;
 
 import calculator.dto.FilteredInputDto;
 import java.util.Arrays;

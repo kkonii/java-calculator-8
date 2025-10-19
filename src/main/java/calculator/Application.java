@@ -1,9 +1,9 @@
 package calculator;
 
 import calculator.controller.Calculator;
-import calculator.domain.DelimiterFilter;
-import calculator.domain.NumberFilter;
-import calculator.domain.PatternFilter;
+import calculator.domain.filter.DelimiterFilter;
+import calculator.domain.filter.NumberFilter;
+import calculator.domain.filter.PatternFilter;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
