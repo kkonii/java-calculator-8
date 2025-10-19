@@ -19,24 +19,33 @@ public class DelimiterFilter {
                 .toList();
 
         if (splitInput.size() == DEFAULT_FORMAT_STATUS) {
-            //기본 구분자 형식으로 작성된 문자열
-            String numbersInput = splitInput.getFirst();
-            validateDefaultFormat(numbersInput);
-            List<String> defaultDelimiters = List.of(",", ":");
+            return filterByDefault(splitInput);
+        }
 
-            return new FilteredInputDto(defaultDelimiters, numbersInput);
-        } else if (splitInput.size() == CUSTOM_FORMAT_STATUS) {
+        if (splitInput.size() == CUSTOM_FORMAT_STATUS) {
             //커스텀 구분자 형식으로 작성된 문자열
-            validateLength(splitInput.getFirst());
-
-            List<String> customDelimiter = List.of(splitInput.getFirst());
-            String numbersInput = splitInput.getLast();
-
-            return new FilteredInputDto(customDelimiter, numbersInput);
+            return filterByCustom(splitInput);
         } else {
             //잘못된 입력 형식
             throw new IllegalArgumentException("올바른 입력 형식이 아닙니다.");
         }
+    }
+
+    private FilteredInputDto filterByDefault(List<String> splitInput) {
+        String numbersInput = splitInput.getFirst();
+        validateDefaultFormat(numbersInput);
+        List<String> defaultDelimiters = List.of(",", ":");
+
+        return new FilteredInputDto(defaultDelimiters, numbersInput);
+    }
+
+    private FilteredInputDto filterByCustom(List<String> splitInput) {
+        validateLength(splitInput.getFirst());
+
+        List<String> customDelimiter = List.of(splitInput.getFirst());
+        String numbersInput = splitInput.getLast();
+
+        return new FilteredInputDto(customDelimiter, numbersInput);
     }
 
     private void validateDefaultFormat(String numberInput) {
