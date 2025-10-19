@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 
 public class PatternFilter {
 
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[가-힣A-Za-z0-9,:]+$");
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[-?\\d+,:]+$");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+)\\\\n(.+)$");
     private static final String CUSTOM_FORMAT_MARKS = "//|\\\\n";
 
@@ -34,6 +34,6 @@ public class PatternFilter {
             return delimiterFilter.filterAsCustom(splitInput);
         }
 
-        throw new IllegalArgumentException("올바른 입력 형식이 아닙니다.");
+        throw new IllegalArgumentException("유효하지 않은 구분자 혹은 문자가 입력되었습니다.");
     }
 }

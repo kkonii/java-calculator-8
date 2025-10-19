@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class NumberFilter {
 
-    private static final String MATCHER_REGEX_FORMAT = "[^\\d\\w %s]";
+    private static final String MATCHER_REGEX_FORMAT = "[^-?\\d+\\w %s]";
 
     public Numbers filter(FilteredInputDto dto) {
         String regex = dto.delimiterInput().stream()
@@ -39,7 +39,7 @@ public class NumberFilter {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("숫자를 입력해야 하는 위치에 다른 문자가 입력되었습니다.");
+            throw new IllegalArgumentException("유효하지 않은 구분자 혹은 문자가 입력되었습니다.");
         }
     }
 }
