@@ -1,6 +1,7 @@
 package calculator.domain.filter;
 
 import calculator.dto.FilteredInputDto;
+import calculator.exception.Error;
 import java.util.List;
 
 public class DelimiterFilter {
@@ -23,7 +24,8 @@ public class DelimiterFilter {
 
     private void validateLength(String extractedDelimiter) {
         if (extractedDelimiter.length() > VALID_CUSTOM_LENGTH) {
-            throw new IllegalArgumentException("커스텀 구분자는 " + VALID_CUSTOM_LENGTH + "개만 입력할 수 있습니다.");
+            throw new IllegalArgumentException(
+                    String.format(Error.INVALID_CUSTOM_DELIMITER_LENGTH.getMessage(), VALID_CUSTOM_LENGTH));
         }
     }
 }

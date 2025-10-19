@@ -1,6 +1,7 @@
 package calculator.domain.filter;
 
 import calculator.dto.FilteredInputDto;
+import calculator.exception.Error;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -34,6 +35,6 @@ public class PatternFilter {
             return delimiterFilter.filterAsCustom(splitInput);
         }
 
-        throw new IllegalArgumentException("유효하지 않은 구분자 혹은 문자가 입력되었습니다.");
+        throw new IllegalArgumentException(Error.INVALID_DELIMITER_OR_CHARACTER.getMessage());
     }
 }

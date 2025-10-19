@@ -2,6 +2,7 @@ package calculator.domain.filter;
 
 import calculator.domain.Numbers;
 import calculator.dto.FilteredInputDto;
+import calculator.exception.Error;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -30,7 +31,7 @@ public class NumberFilter {
         Matcher matcher = Pattern.compile(String.format(MATCHER_REGEX_FORMAT, regex)).matcher(value);
 
         if (matcher.find()) {
-            throw new IllegalArgumentException("커스텀으로 지정하지 않은 구분자가 문자열에 포함되었습니다.");
+            throw new IllegalArgumentException(Error.NON_CUSTOMIZED_DELIMITER.getMessage());
         }
 
         return value;
@@ -40,7 +41,7 @@ public class NumberFilter {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("유효하지 않은 구분자 혹은 문자가 입력되었습니다.");
+            throw new IllegalArgumentException(Error.INVALID_DELIMITER_OR_CHARACTER.getMessage());
         }
     }
 }
