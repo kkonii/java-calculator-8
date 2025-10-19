@@ -9,7 +9,7 @@ import java.util.stream.Collectors;
 
 public class NumberFilter {
 
-    private static final String MATCHER_REGEX_FORMAT = "[^\\d\\s %s]";
+    private static final String MATCHER_REGEX_FORMAT = "[^\\d\\w %s]";
 
     public Numbers filter(FilteredInputDto dto) {
         String regex = dto.delimiterInput().stream()
