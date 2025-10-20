@@ -4,11 +4,14 @@ import calculator.dto.FilteredInputDto;
 import calculator.exception.Error;
 import java.util.Arrays;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class DelimiterFilter {
 
     private static final List<String> DEFAULT_DELIMITERS = List.of(",", ":");
     private static final int VALID_CUSTOM_LENGTH = 1;
+    private static final Pattern NUMERIC = Pattern.compile("\\d");
     private static final String CUSTOM_FORMAT_MARKS = "//|\\\\n";
 
     public FilteredInputDto filterAsDefault(String consoleInput) {
@@ -22,6 +25,7 @@ public class DelimiterFilter {
 
         String delimiterInput = splitInput.getFirst();
         validateLength(delimiterInput);
+        validateType(delimiterInput);
         String numbersInput = splitInput.getLast();
 
         return new FilteredInputDto(List.of(delimiterInput), numbersInput);
@@ -31,6 +35,14 @@ public class DelimiterFilter {
         if (extractedDelimiter.length() > VALID_CUSTOM_LENGTH) {
             throw new IllegalArgumentException(
                     String.format(Error.INVALID_CUSTOM_DELIMITER_LENGTH.getMessage(), VALID_CUSTOM_LENGTH));
+        }
+    }
+
+    private void validateType(String extractedDelimiter) {
+        Matcher numericMatcher = NUMERIC.matcher(extractedDelimiter);
+
+        if (numericMatcher.matches()) {
+            throw new IllegalArgumentException(Error.NUMERIC_TYPE_CAN_NOT_USE.getMessage());
         }
     }
 }
