@@ -6,7 +6,7 @@ import calculator.exception.Error;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class PatternFilter {
+public class InputParser {
 
     private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[-:,\\d]+$");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+)\\\\n(.+)$");
@@ -14,12 +14,12 @@ public class PatternFilter {
     private final DelimiterFilter delimiterFilter;
     private final NumberFilter numberFilter;
 
-    public PatternFilter(DelimiterFilter delimiterFilter, NumberFilter numberFilter) {
+    public InputParser(DelimiterFilter delimiterFilter, NumberFilter numberFilter) {
         this.delimiterFilter = delimiterFilter;
         this.numberFilter = numberFilter;
     }
 
-    public Numbers filterInput(String consoleInput) {
+    public Numbers parseToNumbers(String consoleInput) {
         Matcher defaultMatcher = DEFAULT_PATTERN.matcher(consoleInput);
         Matcher customMatcher = CUSTOM_PATTERN.matcher(consoleInput);
 

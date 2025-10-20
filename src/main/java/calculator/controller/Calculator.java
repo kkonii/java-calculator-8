@@ -1,7 +1,7 @@
 package calculator.controller;
 
 import calculator.domain.Numbers;
-import calculator.domain.filter.PatternFilter;
+import calculator.domain.filter.InputParser;
 import calculator.view.InputView;
 import calculator.view.OutputView;
 
@@ -9,18 +9,18 @@ public class Calculator {
 
     private final InputView inputView;
     private final OutputView outputView;
-    private final PatternFilter patternFilter;
+    private final InputParser inputParser;
 
     public Calculator(InputView inputView, OutputView outputView,
-                      PatternFilter patternFilter) {
+                      InputParser inputParser) {
         this.inputView = inputView;
         this.outputView = outputView;
-        this.patternFilter = patternFilter;
+        this.inputParser = inputParser;
     }
 
     public void run() {
         String consoleInput = inputView.getConsoleInput();
-        Numbers numbers = patternFilter.filterInput(consoleInput);
+        Numbers numbers = inputParser.parseToNumbers(consoleInput);
         outputView.printResult(numbers.summarize());
     }
 }
