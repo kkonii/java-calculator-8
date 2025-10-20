@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class PatternFilter {
 
-    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[-?\\d+,:]+$");
+    private static final Pattern DEFAULT_PATTERN = Pattern.compile("^[-:,\\d]+$");
     private static final Pattern CUSTOM_PATTERN = Pattern.compile("^//(.+)\\\\n(.+)$");
 
     private final DelimiterFilter delimiterFilter;
