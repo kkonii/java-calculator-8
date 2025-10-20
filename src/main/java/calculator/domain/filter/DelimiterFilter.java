@@ -24,12 +24,16 @@ public class DelimiterFilter {
                 .toList();
 
         String delimiterInput = splitInput.getFirst();
-        validateLength(delimiterInput);
-        validateType(delimiterInput);
-        validateContainedDefault(delimiterInput);
+        validate(delimiterInput);
         String numbersInput = splitInput.getLast();
 
         return new FilteredInputDto(List.of(delimiterInput), numbersInput);
+    }
+
+    private void validate(String delimiterInput) {
+        validateLength(delimiterInput);
+        validateType(delimiterInput);
+        validateContainedDefault(delimiterInput);
     }
 
     private void validateLength(String extractedDelimiter) {
