@@ -35,7 +35,7 @@ public class NumberFilter {
         Matcher matcher = Pattern.compile(String.format(MATCHER_REGEX_FORMAT, regex)).matcher(value);
 
         if (matcher.find()) {
-            throw new IllegalArgumentException(Error.NON_CUSTOMIZED_DELIMITER.getMessage());
+            throw new IllegalArgumentException(Error.CONTAINS_NON_CUSTOMIZED_DELIMITER.getMessage());
         }
 
         return value;
@@ -45,7 +45,7 @@ public class NumberFilter {
         try {
             return Integer.parseInt(value);
         } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(Error.INVALID_DELIMITER_OR_CHARACTER.getMessage());
+            throw new IllegalArgumentException(Error.FORMAT_OR_DELIMITER_IS_INVALID.getMessage());
         }
     }
 }

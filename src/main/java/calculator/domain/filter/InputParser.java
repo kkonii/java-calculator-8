@@ -33,6 +33,6 @@ public class InputParser {
             return numberFilter.filterValidNumbers(filteredDto);
         }
 
-        throw new IllegalArgumentException(Error.INVALID_DELIMITER_OR_CHARACTER.getMessage());
+        throw new IllegalArgumentException(Error.FORMAT_OR_DELIMITER_IS_INVALID.getMessage());
     }
 }

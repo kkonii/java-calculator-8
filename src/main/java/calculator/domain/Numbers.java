@@ -14,7 +14,7 @@ public class Numbers {
 
     private void validate(int number) {
         if (number <= 0) {
-            throw new IllegalArgumentException(Error.INVALID_NUMBER_INPUT.getMessage());
+            throw new IllegalArgumentException(Error.IS_INVALID_RANGE.getMessage());
         }
     }
 

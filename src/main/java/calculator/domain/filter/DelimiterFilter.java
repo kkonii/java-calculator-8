@@ -26,6 +26,7 @@ public class DelimiterFilter {
         String delimiterInput = splitInput.getFirst();
         validateLength(delimiterInput);
         validateType(delimiterInput);
+        validateContainedDefault(delimiterInput);
         String numbersInput = splitInput.getLast();
 
         return new FilteredInputDto(List.of(delimiterInput), numbersInput);
@@ -34,7 +35,7 @@ public class DelimiterFilter {
     private void validateLength(String extractedDelimiter) {
         if (extractedDelimiter.length() > VALID_CUSTOM_LENGTH) {
             throw new IllegalArgumentException(
-                    String.format(Error.INVALID_CUSTOM_DELIMITER_LENGTH.getMessage(), VALID_CUSTOM_LENGTH));
+                    String.format(Error.LENGTH_IS_INVALID.getMessage(), VALID_CUSTOM_LENGTH));
         }
     }
 
@@ -42,7 +43,13 @@ public class DelimiterFilter {
         Matcher numericMatcher = NUMERIC.matcher(extractedDelimiter);
 
         if (numericMatcher.matches()) {
-            throw new IllegalArgumentException(Error.NUMERIC_TYPE_CAN_NOT_USE.getMessage());
+            throw new IllegalArgumentException(Error.NUMERIC_TYPE_CAN_NOT_CUSTOMIZE.getMessage());
+        }
+    }
+
+    private void validateContainedDefault(String extractedDelimiter) {
+        if (DEFAULT_DELIMITERS.contains(extractedDelimiter)) {
+            throw new IllegalArgumentException(Error.DEFAULT_DELIMITER_CAN_NOT_CUSTOMIZE.getMessage());
         }
     }
 }
