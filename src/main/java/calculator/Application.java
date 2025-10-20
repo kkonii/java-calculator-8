@@ -9,13 +9,11 @@ import calculator.view.OutputView;
 
 public class Application {
     public static void main(String[] args) {
-        PatternFilter patternFilter = new PatternFilter(new DelimiterFilter());
+        PatternFilter patternFilter = new PatternFilter(new DelimiterFilter(), new NumberFilter());
 
         Calculator calculator = new Calculator(
-                new InputView(),
-                new OutputView(),
-                patternFilter,
-                new NumberFilter());
+                new InputView(), new OutputView(), patternFilter);
+
         calculator.run();
     }
 }
