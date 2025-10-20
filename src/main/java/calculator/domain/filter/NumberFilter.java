@@ -14,9 +14,7 @@ public class NumberFilter {
     private static final String MATCHER_REGEX_FORMAT = "[^-?\\d+\\w %s]";
 
     public Numbers filterValidNumbers(FilteredInputDto dto) {
-        String regex = dto.delimiterInput().stream()
-                .map(Pattern::quote)
-                .collect(Collectors.joining("|"));
+        String regex = parseToRegex(dto.delimiterInput());
 
         List<Integer> splitNumbers = Arrays.stream(dto.numberInput().split(regex))
                 .filter(s -> !s.isBlank())
@@ -25,6 +23,12 @@ public class NumberFilter {
                 .toList();
 
         return new Numbers(splitNumbers);
+    }
+
+    private String parseToRegex(List<String> delimiterInput) {
+        return delimiterInput.stream()
+                .map(Pattern::quote)
+                .collect(Collectors.joining("|"));
     }
 
     private String validateNonCustomized(String value, String regex) {
