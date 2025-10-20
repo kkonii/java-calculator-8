@@ -2,7 +2,9 @@ package calculator.view;
 
 public class OutputView {
 
-    public void printResult(int resultValue) {
-        System.out.printf("결과 : %d", resultValue);
+    private static final String RESULT_IS = "결과 : %d";
+
+    public void printResult(int value) {
+        System.out.printf(RESULT_IS, value);
     }
 }
